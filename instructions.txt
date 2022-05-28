@@ -1,0 +1,25 @@
+
+in theory should be like this 
+#cmake .. -DCMAKE_TOOLCHAIN_FILE=  C:\Users\rminervy\git\android-ndk-r13b-windows-x86_64\android-ndk-r13b\build\cmake\android.toolchain.cmake
+
+build for Android 
+ cmake .. -G "Unix Makefiles"   -DBUILD_PLATFORM="ANDROID"  
+make 
+
+
+build for Win:
+cmake ..  -DBUILD_PLATFORM="WIN"
+cmake --build .
+
+
+for BBB :
+cmake .. -G "Unix Makefiles"   -DBUILD_PLATFORM="BBB"               OR    cmake .. -G "Ninja"   -DBUILD_PLATFORM="BBB" 
+cmake --build .
+
+For Emscripten:
+
+# cmake   -DBUILD_PLATFORM="EMSCRIPTEN" -S . -B emscripten_bin -DCMAKE_TOOLCHAIN_FILE=C:\.conan\ed6a4d\1\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake -DCMAKE_CROSSCOMPILING_EMULATOR="C:\.conan\ed6a4d\1\node\14.15.5_64bit\bin\node.exe" -G "MinGW Makefiles"
+ 
+ #cmake --build emscripten_bin 
+ 
+ build.bat
