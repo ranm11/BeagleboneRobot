@@ -47,12 +47,12 @@ set(thread_pool_src ${thread_pool_src}
 	"thread_pool_src/ThreadPool.cpp"
 	"thread_pool_src/Worker.cpp"
 	"thread_pool_src/Worker.h"
-	"thread_pool_src/motor/DCMotor.cpp"
-	"thread_pool_src/motor/DCMotor.h"
-	"thread_pool_src/motor/Servo.h"
-	"thread_pool_src/motor/Servo.cpp"
-	"thread_pool_src/motor/StepperMotor.h"
-	"thread_pool_src/motor/StepperMotor.cpp"
+	"thread_pool_src/MedialCommand.cpp"
+	#"thread_pool_src/motor/DCMotor.h"
+	#"thread_pool_src/motor/Servo.h"
+	#"thread_pool_src/motor/Servo.cpp"
+	#"thread_pool_src/motor/StepperMotor.h"
+	#"thread_pool_src/motor/StepperMotor.cpp"
 	)
 	target_sources(thread_pool PRIVATE ${thread_pool_src})
 	set_target_properties(thread_pool PROPERTIES CXX_STANDARD 11)

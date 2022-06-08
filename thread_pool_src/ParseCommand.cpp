@@ -5,8 +5,6 @@
 #include<iostream>
 #include "ThreadPool.h"
 #ifndef WIN32
-//#include "GPIO.h"
-//#include "PWM.h"
 #include "util.h"
 #include"DCMotor.h"
 #include "Servo.h"
@@ -16,6 +14,28 @@ constexpr int GPIO_OUT_44 = 44;
 constexpr int GPIO_OUT_45 = 45;
 constexpr char PWM_OUT_23[] = "pwm-7:1";
 constexpr char PWM_OUT_22[] = "pwm-7\:0";
+
+enum class opcode
+{
+	Medial,
+	Lateral,
+	Spoon
+};
+
+enum class Medial
+{
+	Forward,
+	Backward
+};
+
+enum class Lateral
+{
+	Left,
+	Right
+};
+
+/* | OPCODE 1 dword | Operation 1 DWord |Value 1 Dword */
+
 
 ParseCommand::ParseCommand(ThreadPool & pool, std::string command ,int size):m_Pool(pool)
 {
