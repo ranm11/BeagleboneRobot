@@ -6,6 +6,7 @@
 #include <array>
 #include "ParseCommand.h"
 #include"DCMotor.h"
+#include "Servo.h"
 
 class ThreadPool;
 class ParseCommand;
@@ -68,5 +69,6 @@ public:
 	void setCommand(std::string cmd);
 private:
 	ThreadPool & m_pool;
+	exploringBB::Servo * m_servo;
 };
 
