@@ -5,12 +5,7 @@
 #include <mutex>
 #include <array>
 #include "ParseCommand.h"
-#ifndef WIN32
-#include "util.h"
 #include"DCMotor.h"
-#include "Servo.h"
-
-#endif // !WIN32
 
 class ThreadPool;
 class ParseCommand;
@@ -38,29 +33,6 @@ private:
 	ParseCommand m_parseCommand;
 };
 
-// obsolete
-/*enum class RobotCommand
-{
-	GO = 0,
-	BACK = 1,
-	LEFT = 2,
-	RIGHT = 3
-};*/
-
-/*
-this thread go over the input stream  , sort commands and enqueue relavant components
-*/
-/*class ParseCommand :public ICommand
-{
-public:
-	ParseCommand(ThreadPool & pool,	 std::string command, int n);
-	virtual void Execute();
-private:
-	ThreadPool& m_Pool;
-	//RobotCommand command;
-//	std::array<std::string, 4> commands{ { "GO","BACK","LEFT","RIGHT" } };
-};*/
-
 /*
 other components susscribe to this interface 
 should implement subscribe event function
@@ -81,6 +53,8 @@ public:
 	void setCommand(std::string cmd);
 private:
 	ThreadPool & m_pool;
+	exploringBB::DCMotor * m_dcmotor;
+	exploringBB::PWM * m_pwm;
 };
 
 /*
@@ -89,7 +63,7 @@ private:
 class SpoonCommand : public ICommand
 {
 public:
-	SpoonCommand(ThreadPool & pool, std::string command);
+	SpoonCommand(ThreadPool & pool);
 	virtual void Execute();
 	void setCommand(std::string cmd);
 private:

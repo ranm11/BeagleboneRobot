@@ -4,11 +4,7 @@
 #include<vector>
 #include<iostream>
 #include "ThreadPool.h"
-#ifndef WIN32
-#include "util.h"
 #include"DCMotor.h"
-#include "Servo.h"
-#endif // !WIN32
 
 constexpr int GPIO_OUT_44 = 44;
 constexpr int GPIO_OUT_45 = 45;
@@ -39,15 +35,22 @@ enum class Lateral
 
 EngineCommand::EngineCommand(ThreadPool & pool):m_pool(pool)
 {
-	//std::cout << "ParseCommand::ParseCommand" << std::endl;
-
-	// commands =  {"GO","BACK","LEFT","RIGHT"} ;
+	m_pwm = new exploringBB::PWM(std::string(PWM_OUT_23));   // may be included in Motor 
+	m_dcmotor = new exploringBB::DCMotor(m_pwm, GPIO_OUT_44, GPIO_OUT_45, exploringBB::DCMotor::IDLE);
 
 }
 
 void EngineCommand::Execute()
 {
 	std::cout << "Reach Medial Command" << std::endl;
+
+	m_dcmotor->setSpeedPercent((unsigned int)50000);
+	m_dcmotor->setDirection(exploringBB::DCMotor::CLOCKWISE);
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_dcmotor->setSpeedPercent((unsigned int)10000000);
+	m_dcmotor->setDirection(exploringBB::DCMotor::ANTICLOCKWISE);
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_dcmotor->setDirection(exploringBB::DCMotor::IDLE);
 	
 }
 

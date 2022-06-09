@@ -46,7 +46,7 @@ enum class Lateral
 ParseCommand::ParseCommand(ThreadPool & pool):m_Pool(pool)
 {
 	m_engine1 = new EngineCommand(pool);
-
+	m_spoon = new SpoonCommand(pool);
 }
 
 ParseCommand::~ParseCommand()
@@ -65,7 +65,10 @@ void ParseCommand::Parse(char* command)
 {
 	// For HW developing
 	bbbTests();
-
+	m_engine1->setCommand(std::string(command));
+	m_spoon->setCommand(std::string(command));
+	m_Pool.Enque(m_engine1);
+	m_Pool.Enque(m_spoon);
 }
 
 void ParseCommand::bbbTests()
