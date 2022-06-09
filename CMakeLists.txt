@@ -77,6 +77,8 @@ elseif(${BUILD_PLATFORM} STREQUAL "BBB")
 	"thread_pool_src/ThreadPool.cpp"
 	"thread_pool_src/Worker.cpp"
 	"thread_pool_src/Worker.h"
+	"thread_pool_src/EngineCommand.cpp"
+	"thread_pool_src/SpoonCommand.cpp"
 	"thread_pool_src/gpio/GPIO.h"
 	"thread_pool_src/gpio/GPIO.cpp"
 	"thread_pool_src/gpio/PWM.cpp"

@@ -76,8 +76,9 @@ class TimerCommand : public ICommand
 class EngineCommand : public ICommand
 {
 public:
-	EngineCommand(ThreadPool & pool, std::string command);
+	EngineCommand(ThreadPool & pool);
 	virtual void Execute();
+	void setCommand(std::string cmd);
 private:
 	ThreadPool & m_pool;
 };
@@ -90,6 +91,7 @@ class SpoonCommand : public ICommand
 public:
 	SpoonCommand(ThreadPool & pool, std::string command);
 	virtual void Execute();
+	void setCommand(std::string cmd);
 private:
 	ThreadPool & m_pool;
 };

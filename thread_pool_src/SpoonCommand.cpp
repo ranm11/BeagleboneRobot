@@ -50,3 +50,8 @@ void SpoonCommand::Execute()
 	std::cout << "Reach SpoonCommand Command" << std::endl;
 	
 }
+
+void SpoonCommand::setCommand(std::string cmd)
+{
+
+}

@@ -37,7 +37,7 @@ enum class Lateral
 /* | OPCODE 1 dword | Operation 1 DWord |Value 1 Dword */
 
 
-EngineCommand::EngineCommand(ThreadPool & pool, std::string command ):m_pool(pool)
+EngineCommand::EngineCommand(ThreadPool & pool):m_pool(pool)
 {
 	//std::cout << "ParseCommand::ParseCommand" << std::endl;
 
@@ -49,4 +49,9 @@ void EngineCommand::Execute()
 {
 	std::cout << "Reach Medial Command" << std::endl;
 	
+}
+
+void EngineCommand::setCommand(std::string cmd)
+{
+
 }
