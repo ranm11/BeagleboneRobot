@@ -37,7 +37,7 @@ enum class Lateral
 /* | OPCODE 1 dword | Operation 1 DWord |Value 1 Dword */
 
 
-MedialCommand::MedialCommand(ThreadPool & pool, std::string command ):m_Pool(pool)
+SpoonCommand::SpoonCommand(ThreadPool & pool, std::string command ):m_pool(pool)
 {
 	//std::cout << "ParseCommand::ParseCommand" << std::endl;
 
@@ -45,8 +45,8 @@ MedialCommand::MedialCommand(ThreadPool & pool, std::string command ):m_Pool(poo
 
 }
 
-void MedialCommand::Execute()
+void SpoonCommand::Execute()
 {
-	std::cout << "Reach Medial Command" << std::endl;
+	std::cout << "Reach SpoonCommand Command" << std::endl;
 	
 }

@@ -1,5 +1,5 @@
 
-#include "Command.h"
+#include "ParseCommand.h"
 #include <iostream>
 #include<vector>
 #include<iostream>
@@ -35,9 +35,15 @@ enum class Lateral
 };
 
 /* | OPCODE 1 dword | Operation 1 DWord |Value 1 Dword */
+/*
+ this unit should know if we have wheels or caterpiler track
+ should instantiate 2 engines in case of caterpiller 
+ or
+ 1 motor and 1 servo
 
+*/
 
-ParseCommand::ParseCommand(ThreadPool & pool, std::string command ,int size):m_Pool(pool)
+ParseCommand::ParseCommand(ThreadPool & pool):m_Pool(pool)
 {
 	//std::cout << "ParseCommand::ParseCommand" << std::endl;
 
@@ -45,9 +51,15 @@ ParseCommand::ParseCommand(ThreadPool & pool, std::string command ,int size):m_P
 
 }
 
-void ParseCommand::Execute()
+void ParseCommand::Parse(char* command)
 {
-	std::cout << "Reach ParseConnand" << std::endl;
+	bbbTests();
+
+}
+
+void ParseCommand::bbbTests()
+{
+	std::cout << "Reach bbbTests" << std::endl;
 #ifndef WIN32
 
 //enqueue thread1 for power - will subscribe to ParseCommand Events provide notify function to ParseCommand

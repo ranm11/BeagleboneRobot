@@ -13,9 +13,9 @@
 #define PORT     8080
 #define MAXLINE 1024
 
-NetworkUdpReadCommand::NetworkUdpReadCommand(ThreadPool & pool):m_Pool(pool)
+NetworkUdpReadCommand::NetworkUdpReadCommand(ThreadPool & pool):m_Pool(pool),m_parseCommand(pool)
 {
-
+	
 }
 
 
@@ -29,8 +29,10 @@ void NetworkUdpReadCommand::Execute()
 
 		char buffer[10];
 		int n(10);
-		ICommand*  cmd = new ParseCommand(m_Pool, buffer, n);
-		m_Pool.Enque(cmd);
+		//ICommand*  cmd = new ParseCommand(m_Pool, buffer, n);
+		//ICommand* engine = new EngineCommand(m_Pool, buffer);
+		//m_Pool.Enque(cmd);
+		m_parseCommand.Parse(buffer);
 	}
 	
 

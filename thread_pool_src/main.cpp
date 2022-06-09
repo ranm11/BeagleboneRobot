@@ -12,6 +12,13 @@
 #include "Command.h"
 #include "ThreadPool.h"
 
+enum class Configuration
+{
+	Caterpiller,
+	Wheels,
+	Spoon
+};
+
 int main()
 {
     std::cout << "Hello World!\n"; 
