@@ -4,11 +4,7 @@
 #include<vector>
 #include<iostream>
 #include "ThreadPool.h"
-#ifndef WIN32
-#include "util.h"
 #include"DCMotor.h"
-#include "Servo.h"
-#endif // !WIN32
 
 constexpr int GPIO_OUT_44 = 44;
 constexpr int GPIO_OUT_45 = 45;

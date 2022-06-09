@@ -97,7 +97,10 @@ private:
 	int exportGPIO();
 	int unexportGPIO();
 	ofstream stream;
+#ifndef WIN32
 	pthread_t thread;
+#endif // !WIN32
+
 	CallbackType callbackFunction;
 	bool threadRunning;
 	int togglePeriod;  //default 100ms
