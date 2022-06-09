@@ -34,6 +34,16 @@ private:
 	ParseCommand m_parseCommand;
 };
 
+class SPIReadCommand :public ICommand
+{
+public:
+	SPIReadCommand(ThreadPool & pool);
+	virtual void Execute();
+private:
+	ThreadPool& m_Pool;
+	ParseCommand m_parseCommand;
+};
+
 /*
 other components susscribe to this interface 
 should implement subscribe event function
