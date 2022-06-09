@@ -11,15 +11,19 @@
 #endif // !WIN32
 
 class ThreadPool;
+class SpoonCommand;
+class EngineCommand;
 
 class ParseCommand 
 {
 public:
 	ParseCommand(ThreadPool & pool);
+	~ParseCommand();
 	void Parse(char*);
 private:
 	ThreadPool& m_Pool;
-	//has Engine Command
+	EngineCommand * m_engine1;
+	SpoonCommand * m_spoon;
 	//has Lateral Command
 	// Has Spoon Command
 	void bbbTests();

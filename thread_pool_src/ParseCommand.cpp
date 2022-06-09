@@ -40,19 +40,30 @@ enum class Lateral
  should instantiate 2 engines in case of caterpiller 
  or
  1 motor and 1 servo
-
+ init with Factory
 */
 
 ParseCommand::ParseCommand(ThreadPool & pool):m_Pool(pool)
 {
-	//std::cout << "ParseCommand::ParseCommand" << std::endl;
+	m_engine1 = new EngineCommand(pool);
 
-	// commands =  {"GO","BACK","LEFT","RIGHT"} ;
+}
 
+ParseCommand::~ParseCommand()
+{
+	if (m_engine1 != nullptr)
+	{
+		delete m_engine1;
+	}
+	if (m_spoon != nullptr)
+	{
+		delete m_spoon;
+	}
 }
 
 void ParseCommand::Parse(char* command)
 {
+	// For HW developing
 	bbbTests();
 
 }
