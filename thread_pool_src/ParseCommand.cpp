@@ -64,7 +64,7 @@ ParseCommand::~ParseCommand()
 void ParseCommand::Parse(char* command)
 {
 	// For HW developing
-	bbbTests();
+	//bbbTests();
 	m_engine1->setCommand(std::string(command));
 	m_spoon->setCommand(std::string(command));
 	m_Pool.Enque(m_engine1);

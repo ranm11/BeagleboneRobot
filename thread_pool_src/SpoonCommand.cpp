@@ -35,16 +35,22 @@ enum class Lateral
 
 SpoonCommand::SpoonCommand(ThreadPool & pool):m_pool(pool)
 {
-	//std::cout << "ParseCommand::ParseCommand" << std::endl;
-
-	// commands =  {"GO","BACK","LEFT","RIGHT"} ;
+	m_servo = new exploringBB::Servo(std::string(PWM_OUT_22));
 
 }
 
 void SpoonCommand::Execute()
 {
 	std::cout << "Reach SpoonCommand Command" << std::endl;
-	
+	m_servo->Move_to(0);
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_servo->Move_to(30);
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_servo->Move_to(60);
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_servo->Move_to(90);
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_servo->Move_to(170);
 }
 
 void SpoonCommand::setCommand(std::string cmd)
