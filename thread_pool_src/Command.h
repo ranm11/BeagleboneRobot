@@ -5,12 +5,7 @@
 #include <mutex>
 #include <array>
 #include "ParseCommand.h"
-#ifndef WIN32
-#include "util.h"
 #include"DCMotor.h"
-#include "Servo.h"
-
-#endif // !WIN32
 
 class ThreadPool;
 class ParseCommand;
@@ -58,6 +53,8 @@ public:
 	void setCommand(std::string cmd);
 private:
 	ThreadPool & m_pool;
+	exploringBB::DCMotor * m_dcmotor;
+	exploringBB::PWM * m_pwm;
 };
 
 /*

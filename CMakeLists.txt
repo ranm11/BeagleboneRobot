@@ -51,6 +51,7 @@ set(thread_pool_src ${thread_pool_src}
 	"thread_pool_src/SpoonCommand.cpp"
 	"thread_pool_src/gpio/GPIO_mock.cpp"
 	"thread_pool_src/gpio/util_mock.cpp"
+	"thread_pool_src/gpio/PWM_mock.cpp"
 	"thread_pool_src/motor/DCMotor.cpp"
 	#"thread_pool_src/motor/Servo.cpp"
 	#"thread_pool_src/motor/StepperMotor.h"
