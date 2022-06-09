@@ -1,12 +1,10 @@
 
-#include "Command.h"
+#include "ParseCommand.h"
 #include <iostream>
 #include<vector>
 #include<iostream>
 #include "ThreadPool.h"
 #ifndef WIN32
-//#include "GPIO.h"
-//#include "PWM.h"
 #include "util.h"
 #include"DCMotor.h"
 #include "Servo.h"
@@ -17,7 +15,35 @@ constexpr int GPIO_OUT_45 = 45;
 constexpr char PWM_OUT_23[] = "pwm-7:1";
 constexpr char PWM_OUT_22[] = "pwm-7\:0";
 
-ParseCommand::ParseCommand(ThreadPool & pool, std::string command ,int size):m_Pool(pool)
+enum class opcode
+{
+	Medial,
+	Lateral,
+	Spoon
+};
+
+enum class Medial
+{
+	Forward,
+	Backward
+};
+
+enum class Lateral
+{
+	Left,
+	Right
+};
+
+/* | OPCODE 1 dword | Operation 1 DWord |Value 1 Dword */
+/*
+ this unit should know if we have wheels or caterpiler track
+ should instantiate 2 engines in case of caterpiller 
+ or
+ 1 motor and 1 servo
+
+*/
+
+ParseCommand::ParseCommand(ThreadPool & pool):m_Pool(pool)
 {
 	//std::cout << "ParseCommand::ParseCommand" << std::endl;
 
@@ -25,9 +51,15 @@ ParseCommand::ParseCommand(ThreadPool & pool, std::string command ,int size):m_P
 
 }
 
-void ParseCommand::Execute()
+void ParseCommand::Parse(char* command)
 {
-	std::cout << "Reach ParseConnand" << std::endl;
+	bbbTests();
+
+}
+
+void ParseCommand::bbbTests()
+{
+	std::cout << "Reach bbbTests" << std::endl;
 #ifndef WIN32
 
 //enqueue thread1 for power - will subscribe to ParseCommand Events provide notify function to ParseCommand

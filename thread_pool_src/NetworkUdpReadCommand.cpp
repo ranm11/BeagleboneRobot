@@ -23,7 +23,7 @@
 #define PORT     8080
 #define MAXLINE 1024
 
-NetworkUdpReadCommand::NetworkUdpReadCommand(ThreadPool & pool):m_Pool(pool)
+NetworkUdpReadCommand::NetworkUdpReadCommand(ThreadPool & pool):m_Pool(pool),m_parseCommand(pool)
 {
 	std::cout << "NetworkUdpReadCommand::NetworkUdpReadCommand" << std::endl;
 }
@@ -69,7 +69,7 @@ void NetworkUdpReadCommand::Execute()
 			MSG_WAITALL, (struct sockaddr *) &cliaddr,
 			(socklen_t*)&len);
 
-		ICommand*  cmd = new ParseCommand(m_Pool, buffer, n);
+		//ICommand*  cmd = new ParseCommand(m_Pool, buffer, n);
 #ifndef WIN32
 	//	using namespace exploringBB;
 	//	exploringBB::GPIO outGPIO(45);
@@ -83,7 +83,7 @@ void NetworkUdpReadCommand::Execute()
 	//	outGPIO.setValue(GPIO::LOW);
 	//	std::cout << "GPIO(44) has value: " << outGPIO.getValue() << std::endl;
 #endif // !1
-		m_Pool.Enque(cmd);
+		m_parseCommand.Parse(buffer);
 	}
 	
 
