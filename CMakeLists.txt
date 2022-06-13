@@ -55,6 +55,8 @@ set(thread_pool_src ${thread_pool_src}
 	"thread_pool_src/gpio/PWM_mock.cpp"
 	"thread_pool_src/motor/DCMotor.cpp"
 	"thread_pool_src/motor/Servo.cpp"
+	"thread_pool_src/bus/BusDevice.cpp"
+	"thread_pool_src/bus/SPIDevice_mock.cpp"
 	#"thread_pool_src/motor/StepperMotor.h"
 	#"thread_pool_src/motor/StepperMotor.cpp"
 	)
@@ -95,6 +97,8 @@ elseif(${BUILD_PLATFORM} STREQUAL "BBB")
 	"thread_pool_src/motor/Servo.cpp"
 	"thread_pool_src/motor/StepperMotor.h"
 	"thread_pool_src/motor/StepperMotor.cpp"
+	"thread_pool_src/bus/BusDevice.cpp"
+	"thread_pool_src/bus/SPIDevice.cpp"
 	)
 
 	target_sources(thread_pool PRIVATE ${thread_pool_src})

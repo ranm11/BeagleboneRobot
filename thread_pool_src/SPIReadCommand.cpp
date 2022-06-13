@@ -7,6 +7,8 @@
 #include "ThreadPool.h"
 #include<thread>
 #include<chrono>
+#include "bus/SPIDevice.h"
+
 /*
 	this Function should read from UDP channel and enqueue Icommand to queue in an endless loop
 */
@@ -29,10 +31,8 @@ void SPIReadCommand::Execute()
 
 		char buffer[10];
 		int n(10);
-		//ICommand*  cmd = new ParseCommand(m_Pool, buffer, n);
-		//ICommand* engine = new EngineCommand(m_Pool, buffer);
-		//m_Pool.Enque(cmd);
-		m_parseCommand.Parse(buffer);
+		
+		//m_parseCommand.Parse(buffer);
 	}
 	
 
