@@ -47,7 +47,7 @@ ParseCommand::ParseCommand(ThreadPool & pool):m_Pool(pool)
 {
 	m_engine1 = new EngineCommand(pool);
 	m_spoon = new SpoonCommand(pool);
-	m_spi_send = new SPISendCommand(pool);
+	
 }
 
 ParseCommand::~ParseCommand()
@@ -70,7 +70,6 @@ void ParseCommand::Parse(char* command)
 	m_spoon->setCommand(std::string(command));
 	m_Pool.Enque(m_engine1);
 	m_Pool.Enque(m_spoon);
-	m_Pool.Enque(m_spi_send);
 }
 
 void ParseCommand::bbbTests()

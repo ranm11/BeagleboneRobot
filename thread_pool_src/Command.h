@@ -53,7 +53,7 @@ public:
 	virtual void Execute();
 private:
 	ThreadPool& m_Pool;
-	//ParseCommand m_parseCommand;
+	ParseCommand m_parseCommand;
 	exploringBB::SPIDevice* m_spiDevice;
 };
 
