@@ -8,6 +8,7 @@
 class ThreadPool;
 class SpoonCommand;
 class EngineCommand;
+class SPISendCommand;
 
 class ParseCommand 
 {
@@ -19,6 +20,7 @@ private:
 	ThreadPool& m_Pool;
 	EngineCommand * m_engine1;
 	SpoonCommand * m_spoon;
+	SPISendCommand * m_spi_send;
 	//has Lateral Command
 	// Has Spoon Command
 	void bbbTests();

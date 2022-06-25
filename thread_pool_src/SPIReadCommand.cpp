@@ -12,10 +12,9 @@
 /*
 	this Function should read from UDP channel and enqueue Icommand to queue in an endless loop
 */
-#define PORT     8080
 #define MAXLINE 1024
 
-SPIReadCommand::SPIReadCommand(ThreadPool & pool):m_Pool(pool),m_parseCommand(pool)
+SPIReadCommand::SPIReadCommand(ThreadPool & pool):m_Pool(pool)
 {
 	
 }

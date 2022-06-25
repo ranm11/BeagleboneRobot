@@ -26,8 +26,8 @@ int main()
 	pool.Start();
 	ICommand * udp = new NetworkUdpReadCommand(pool);
 	pool.Enque(udp);
-	ICommand *spiChannel = new SPIReadCommand(pool);
-	pool.Enque(spiChannel);
+	//ICommand *spiChannel = new SPIReadCommand(pool);
+	//pool.Enque(spiChannel);
 	//for (int i = 0; i < 15; i++)
 	//{
 	//	ICommand * cmd = new TestCommand();

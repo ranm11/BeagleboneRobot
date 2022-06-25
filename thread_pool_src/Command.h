@@ -7,6 +7,7 @@
 #include "ParseCommand.h"
 #include"DCMotor.h"
 #include "Servo.h"
+#include "bus/SPIDevice.h"
 
 class ThreadPool;
 class ParseCommand;
@@ -41,7 +42,19 @@ public:
 	virtual void Execute();
 private:
 	ThreadPool& m_Pool;
-	ParseCommand m_parseCommand;
+	
+};
+
+// SPI sender 
+class SPISendCommand :public ICommand
+{
+public:
+	SPISendCommand(ThreadPool & pool);
+	virtual void Execute();
+private:
+	ThreadPool& m_Pool;
+	//ParseCommand m_parseCommand;
+	exploringBB::SPIDevice* m_spiDevice;
 };
 
 /*
