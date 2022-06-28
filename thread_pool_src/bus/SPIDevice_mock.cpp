@@ -76,8 +76,9 @@ int SPIDevice::open(){
  * @param length The length of the array to send
  * @return -1 on failure
  */
-int SPIDevice::transfer(unsigned char send[], unsigned char receive[], int length){
-	
+int SPIDevice::transfer(unsigned char send[], unsigned char receive[], int length)
+{
+	memcpy(receive, send, length);
 	return 0;
 }
 
