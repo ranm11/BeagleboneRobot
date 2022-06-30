@@ -101,6 +101,7 @@ elseif(${BUILD_PLATFORM} STREQUAL "BBB")
 	"thread_pool_src/motor/StepperMotor.cpp"
 	"thread_pool_src/bus/BusDevice.cpp"
 	"thread_pool_src/bus/SPIDevice.cpp"
+	"thread_pool_src/rf24/RF24.cpp"
 	)
 
 	target_sources(thread_pool PRIVATE ${thread_pool_src})

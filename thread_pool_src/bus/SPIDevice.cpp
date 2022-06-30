@@ -101,6 +101,48 @@ int SPIDevice::transfer(unsigned char send[], unsigned char receive[], int lengt
 	return status;
 }
 
+int SPIDevice::transfernb(char send[], char receive[], int length)
+{
+	struct spi_ioc_transfer	transfer;
+	memset(&transfer, 0, sizeof(transfer));
+	transfer.tx_buf = (unsigned long)send;
+	transfer.rx_buf = (unsigned long)receive;
+	transfer.len = length;
+	transfer.speed_hz = this->speed;
+	transfer.bits_per_word = this->bits;
+	transfer.delay_usecs = this->delay;
+	int status = ioctl(this->file, SPI_IOC_MESSAGE(1), &transfer);
+	if (status < 0) {
+		perror("SPI: SPI_IOC_MESSAGE Failed");
+		return -1;
+	}
+	return status;
+}
+
+int SPIDevice::transfer( uint8_t tx_)
+{
+	int ret;
+	uint8_t tx[1] = { tx_ };
+	uint8_t rx[1];
+	
+	struct spi_ioc_transfer tr;
+	tr.tx_buf = (unsigned long)tx;
+	tr.rx_buf = (unsigned long)rx;
+	tr.len = sizeof(tx);
+	tr.delay_usecs = this->delay;
+	//tr.cs_change = 1;
+	tr.speed_hz = this->speed;
+	tr.bits_per_word = this->bits;
+
+	ret = ioctl(this->file, SPI_IOC_MESSAGE(1), &tr);
+	if (ret < 1)
+	{
+		perror("can't send spi message");
+		return -1;
+	}
+
+	return rx[0];
+}
 /**
  * A method to read a single register at the SPI address
  * @param registerAddress the address of the register from the device datasheet
