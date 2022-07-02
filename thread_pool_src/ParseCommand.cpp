@@ -47,6 +47,8 @@ ParseCommand::ParseCommand(ThreadPool & pool):m_Pool(pool)
 {
 	m_engine1 = new EngineCommand(pool);
 	m_spoon = new SpoonCommand(pool);
+	//if wheels - instantiate - if caterpiller instantiate 2 engines - have a startegy pattern 
+	m_wheelCommand = new WheelCommand(pool);
 	
 }
 
@@ -61,15 +63,16 @@ ParseCommand::~ParseCommand()
 		delete m_spoon;
 	}
 }
-
+/*
+	this function go over 
+*/
 void ParseCommand::Parse(char* command)
 {
-	// For HW developing
-	//bbbTests();
+	//read type and length
 	m_engine1->setCommand(std::string(command));
 	m_spoon->setCommand(std::string(command));
-	m_Pool.Enque(m_engine1);
-	m_Pool.Enque(m_spoon);
+	//m_Pool.Enque(m_engine1);
+	//m_Pool.Enque(m_spoon);
 }
 
 void ParseCommand::bbbTests()

@@ -48,7 +48,7 @@ set(thread_pool_src ${thread_pool_src}
 	"thread_pool_src/Worker.cpp"
 	"thread_pool_src/Worker.h"
 	"thread_pool_src/SPIReadCommand.cpp"
-	"thread_pool_src/SPISendCommand.cpp"
+	"thread_pool_src/SpiCommandSimulator.cpp"
 	"thread_pool_src/EngineCommand.cpp"
 	"thread_pool_src/SpoonCommand.cpp"
 	"thread_pool_src/gpio/GPIO_mock.cpp"
@@ -58,6 +58,7 @@ set(thread_pool_src ${thread_pool_src}
 	"thread_pool_src/motor/Servo.cpp"
 	"thread_pool_src/bus/BusDevice.cpp"
 	"thread_pool_src/bus/SPIDevice_mock.cpp"
+	"thread_pool_src/WheelCommand.cpp"
 	#"thread_pool_src/motor/StepperMotor.h"
 	#"thread_pool_src/motor/StepperMotor.cpp"
 	)
@@ -97,10 +98,11 @@ elseif(${BUILD_PLATFORM} STREQUAL "BBB")
 	"thread_pool_src/motor/Servo.h"
 	"thread_pool_src/motor/Servo.cpp"
 	"thread_pool_src/motor/StepperMotor.h"
-	"thread_pool_src/SPISendCommand.cpp"
+	"thread_pool_src/SpiCommandSimulator.cpp"
 	"thread_pool_src/motor/StepperMotor.cpp"
 	"thread_pool_src/bus/BusDevice.cpp"
 	"thread_pool_src/bus/SPIDevice.cpp"
+	"thread_pool_src/WheelCommand.cpp"
 	#"thread_pool_src/rf24/RF24.cpp"
 	)
 

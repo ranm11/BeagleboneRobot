@@ -15,7 +15,7 @@
 #define MAX_SPI_MESSAGE 38
 
 
-SPIReadCommand::SPIReadCommand(ThreadPool & pool) :m_Pool(pool), m_parseCommand(pool)
+SPIReadCommand::SPIReadCommand(ThreadPool & pool, SpiCommandSimulator* spi_sim) :m_Pool(pool), m_parseCommand(pool),m_spi_sim(spi_sim)
 {
 	m_spiDevice = new exploringBB::SPIDevice(0, 1);
 }
@@ -34,7 +34,8 @@ void SPIReadCommand::Execute()
 		0xF0, 0x0D,
 	};
 	unsigned char send[MAX_SPI_MESSAGE], receive[MAX_SPI_MESSAGE];
-	m_spiDevice->transfer(send_u, receive, MAX_SPI_MESSAGE);
+	m_spi_sim->getCommand(send);
+	m_spiDevice->transfer(send, receive, MAX_SPI_MESSAGE);
 
 	for (int ret = 0; ret < MAX_SPI_MESSAGE; ret++) {
 		if (!(ret % 6))
@@ -42,6 +43,8 @@ void SPIReadCommand::Execute()
 		printf("%.2X ", receive[ret]);
 	}
 	puts("");
-	// call parsecommand here 
+	// search for message header make sure its completed by length  call parsecommand here 
+	// send connand after header
+	m_parseCommand.Parse((char*)receive);
 
 }

@@ -12,6 +12,16 @@
 class ThreadPool;
 class ParseCommand;
 
+#define MAX_SPI_MESSAGE 38
+constexpr uint16_t message_header = 0x5BFC;
+
+enum class CommandType: std::uint8_t
+{
+	Engine,
+	Wheel,
+	Spoon
+};
+
 class ICommand
 {
 public:
@@ -35,27 +45,26 @@ private:
 	ParseCommand m_parseCommand;
 };
 
+// SPI Command Simulator
+class SpiCommandSimulator
+{
+public:
+	SpiCommandSimulator();
+	int getCommand(unsigned char* command);
+private:
+
+};
+
 class SPIReadCommand :public ICommand
 {
 public:
-	SPIReadCommand(ThreadPool & pool);
+	SPIReadCommand(ThreadPool & pool , SpiCommandSimulator* spi_sim = nullptr);
 	virtual void Execute();
 private:
 	ThreadPool& m_Pool;
 	ParseCommand m_parseCommand;
 	exploringBB::SPIDevice* m_spiDevice;
-};
-
-// SPI sender 
-class SPISendCommand :public ICommand
-{
-public:
-	SPISendCommand(ThreadPool & pool);
-	virtual void Execute();
-private:
-	ThreadPool& m_Pool;
-	ParseCommand m_parseCommand;
-	exploringBB::SPIDevice* m_spiDevice;
+	SpiCommandSimulator* m_spi_sim;
 };
 
 /*
@@ -83,7 +92,7 @@ private:
 };
 
 /*
-	Spoon command
+	Spoon command 
 */
 class SpoonCommand : public ICommand
 {
@@ -96,3 +105,16 @@ private:
 	exploringBB::Servo * m_servo;
 };
 
+/*
+	Spoon command
+*/
+class WheelCommand : public ICommand
+{
+public:
+	WheelCommand(ThreadPool & pool);
+	virtual void Execute();
+	void setCommand(std::string cmd);
+private:
+	ThreadPool & m_pool;
+	exploringBB::Servo * m_servo;
+};
