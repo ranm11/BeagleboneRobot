@@ -63,6 +63,8 @@ public:
 	virtual void close();
 	virtual ~SPIDevice();
 	virtual int transfer(unsigned char read[], unsigned char write[], int length);
+	virtual int transfernb( char read[],  char write[], int length);
+	virtual int transfer(uint8_t tx_);
 private:
 	SPIMODE mode;     //!< The SPI mode as per the SPIMODE enumeration
 	uint8_t bits;     //!< The number of bits per word

@@ -82,6 +82,16 @@ int SPIDevice::transfer(unsigned char send[], unsigned char receive[], int lengt
 	return 0;
 }
 
+int SPIDevice::transfernb(char send[], char receive[], int length)
+{
+	memcpy(receive, send, length);
+	return 0;
+}
+
+int SPIDevice::transfer(uint8_t tx_)
+{
+	return 0;
+}
 /**
  * A method to read a single register at the SPI address
  * @param registerAddress the address of the register from the device datasheet
