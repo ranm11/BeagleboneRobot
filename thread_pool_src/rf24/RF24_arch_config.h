@@ -57,7 +57,7 @@ typedef uint16_t prog_uint16_t;
 #define INPUT exploringBB::GPIO::INPUT
 #define OUTPUT exploringBB::GPIO::OUTPUT
 #define digitalWrite(pin, value) exploringBB::GPIO::write(pin, value)
-#define pinMode(pin, direction) exploringBB::GPIO::open(pin, direction)
+//#define pinMode(pin, direction) exploringBB::GPIO::open(pin, direction)
 #define delay(milisec) __msleep(milisec)
 #define delayMicroseconds(usec) __usleep(usec)
 #define millis() __millis()

@@ -9,7 +9,7 @@
 #include "nRF24L01.h"
 #include "RF24_config.h"
 #include "RF24.h"
-
+#include "../gpio/GPIO.h"
 /****************************************************************************/
 
 void RF24::csn(bool mode)
@@ -17,7 +17,7 @@ void RF24::csn(bool mode)
 
 #if defined (RF24_TINY)
 	if (ce_pin != csn_pin) {
-		digitalWrite(csn_pin,mode);
+		GPIOWrite(csn_pin,mode);
 	} 
 	else {
 		if (mode == HIGH) {
@@ -49,7 +49,7 @@ void RF24::csn(bool mode)
 #endif
 
 #if !defined (RF24_LINUX)
-	digitalWrite(csn_pin,mode);
+	  GPIOWrite(csn_pin,mode);
 	delayMicroseconds(5);
 #endif
 
@@ -60,7 +60,7 @@ void RF24::csn(bool mode)
 void RF24::ce(bool level)
 {
   //Allow for 3-pin use on ATTiny
-  if (ce_pin != csn_pin) digitalWrite(ce_pin,level); //write to gpio port 
+  if (ce_pin != csn_pin) GPIOWrite(ce_pin,level); //write to gpio port 
   
 }
 
@@ -595,23 +595,23 @@ bool RF24::begin(void)
 	
    // _SPI.begin(csn_pin);
 
-	pinMode(ce_pin,OUTPUT);
+	GPIOPinMode(ce_pin,OUTPUT);
 	ce(LOW);    
 
 	delay(100);
   
   #elif defined(LITTLEWIRE)
-    pinMode(csn_pin,OUTPUT);
+  GPIOPinMode(csn_pin,OUTPUT);
     _SPI.begin();
     csn(HIGH);
   #else
     // Initialize pins
-    if (ce_pin != csn_pin) pinMode(ce_pin,OUTPUT);  
+    if (ce_pin != csn_pin) GPIOPinMode(ce_pin,OUTPUT);
   
     #if ! defined(LITTLEWIRE)
       if (ce_pin != csn_pin)
     #endif
-        pinMode(csn_pin,OUTPUT);
+		  GPIOPinMode(csn_pin,OUTPUT);
     
     _SPI.begin();
     ce(LOW);
@@ -1166,6 +1166,19 @@ void RF24::openReadingPipe(uint8_t child, uint64_t address)
   }
 }
 
+void RF24::GPIOPinMode(int port, int direction)
+{
+	exploringBB::GPIO _gpio(port);
+	
+	_gpio.setDirection(direction? _gpio.OUTPUT: _gpio.INPUT);
+}
+
+void RF24::GPIOWrite(int port, int value)
+{
+	exploringBB::GPIO _gpio(port);
+	_gpio.setValue(value ? _gpio.HIGH : _gpio.LOW);
+
+}
 /****************************************************************************/
 void RF24::setAddressWidth(uint8_t a_width){
 
@@ -1294,7 +1307,7 @@ void RF24::writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
       *ptx++ =  *current++;
     }
 	
-    _SPI.transfern( (char *) spi_txbuff, size);
+    _SPI.transfernb((char *)spi_txbuff,(char *) spi_txbuff, size);
 	endTransaction();
   #else
   beginTransaction();
@@ -1553,9 +1566,9 @@ void RF24::setRetries(uint8_t delay, uint8_t count)
 
 void SPIClass::begin() {
 
-  pinMode(USCK, OUTPUT);
-  pinMode(DO, OUTPUT);
-  pinMode(DI, INPUT);
+	GPIOPinMode(USCK, OUTPUT);
+	GPIOPinMode(DO, OUTPUT);
+	GPIOPinMode(DI, INPUT);
   USICR = _BV(USIWM0);
 
 }
