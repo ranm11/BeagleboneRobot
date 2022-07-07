@@ -687,7 +687,8 @@ s   *
    *  defaults.
    */
   /**@{*/
-
+	void GPIOPinMode(int port, int direction);
+	void GPIOWrite(int port, int value);
   /**
   * Set the address width from 3 to 5 bytes (24, 32 or 40 bit)
   *
