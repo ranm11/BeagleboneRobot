@@ -53,7 +53,7 @@ void WheelCommand::Execute()
 	m_servo->Move_to(170);
 }
 
-void WheelCommand::setCommand(std::string cmd)
+void WheelCommand::setCommand(WheelMessage *  msg)
 {
 
 }

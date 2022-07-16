@@ -33,11 +33,13 @@ Value up to 30 bytes
 
 SpiCommandSimulator::SpiCommandSimulator()
 {
-	
+	m_wheelMessage.ServoValue = 0;
+	m_engineMessage.MotorSpeed = 0;
 }
 
 int SpiCommandSimulator::getCommand(unsigned char* command)
 {
+	/*2B init -1B Engine specifier - 1B Reserve -  2B Servo Y value  */
 	unsigned char send_engine_command[] = {
 		0x5B, 0xFC, 0x00, 0x00, 0x10, 0xFF,
 		0x40, 0x00, 0x00, 0x00, 0x00, 0x95,
@@ -48,6 +50,7 @@ int SpiCommandSimulator::getCommand(unsigned char* command)
 		0xF0, 0x0D,
 	};
 
+	/*2B init -1B Wheel specifier - 1B Reserve -  2B Servo X value  */
 	unsigned char send_wheel_command[] = {
 		0x5B, 0xFC, 0x01, 0x00, 0x10, 0xFF,
 		0x40, 0x00, 0x00, 0x00, 0x00, 0x95,
@@ -68,8 +71,16 @@ int SpiCommandSimulator::getCommand(unsigned char* command)
 		0xF0, 0x0D,
 	};
 
-	memcpy(command, send_engine_command, MAX_SPI_MESSAGE);
-	return MAX_SPI_MESSAGE;
+	m_wheelMessage.ServoValue = m_wheelMessage.ServoValue + 30;
+	m_engineMessage.MotorSpeed = m_engineMessage.MotorSpeed + 20;
+
+	//memcpy(command, send_wheel_command, MAX_SPI_MESSAGE);
+	
+	memcpy(command, (char*)(&m_wheelMessage), sizeof(m_wheelMessage));
+	int messageSize = sizeof(m_wheelMessage);
+	memcpy(command + messageSize, (char*)(&m_engineMessage), sizeof(m_engineMessage));
+	 messageSize += sizeof(m_engineMessage);
+	return messageSize;
 }
 
 

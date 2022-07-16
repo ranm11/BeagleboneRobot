@@ -69,10 +69,21 @@ ParseCommand::~ParseCommand()
 void ParseCommand::Parse(char* command)
 {
 	//read type and length
-	m_engine1->setCommand(std::string(command));
-	m_spoon->setCommand(std::string(command));
-	//m_Pool.Enque(m_engine1);
-	//m_Pool.Enque(m_spoon);
+	uint16_t CommandMarker= *(uint16_t*)(command);
+	//CommandType type = Wheel;//= *(CommandType*)(command + sizeof(CommandMarker));
+	uint8_t type = *(uint8_t*)(command + sizeof(CommandMarker));
+	switch (type) {
+	case CommandType::Engine:
+		m_engine1->setCommand(std::string(command));
+		m_Pool.Enque(m_engine1);
+		break;
+	case CommandType::Wheel:
+		m_wheelCommand->setCommand((WheelMessage*)(command));
+		m_Pool.Enque(m_spoon);
+		break;
+	default:
+		break;
+	}
 }
 
 void ParseCommand::bbbTests()

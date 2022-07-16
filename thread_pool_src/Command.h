@@ -8,20 +8,13 @@
 #include"DCMotor.h"
 #include "Servo.h"
 #include "bus/SPIDevice.h"
+#include "Messages.h"
 //#include "rf24/RF24.h"
 class ThreadPool;
 class ParseCommand;
 class RF24;
 
-#define MAX_SPI_MESSAGE 38
-constexpr uint16_t message_header = 0x5BFC;
 
-enum class CommandType: std::uint8_t
-{
-	Engine,
-	Wheel,
-	Spoon
-};
 
 class ICommand
 {
@@ -53,13 +46,15 @@ public:
 	SpiCommandSimulator();
 	int getCommand(unsigned char* command);
 private:
+	WheelMessage m_wheelMessage;
+	EngineMessage m_engineMessage;
 
 };
 
 class SPIReadCommand :public ICommand
 {
 public:
-	SPIReadCommand(ThreadPool & pool , SpiCommandSimulator* spi_sim = nullptr);
+	SPIReadCommand(ThreadPool & pool );
 	virtual void Execute();
 private:
 	ThreadPool& m_Pool;
@@ -114,7 +109,7 @@ class WheelCommand : public ICommand
 public:
 	WheelCommand(ThreadPool & pool);
 	virtual void Execute();
-	void setCommand(std::string cmd);
+	void setCommand(WheelMessage* cmd);
 private:
 	ThreadPool & m_pool;
 	exploringBB::Servo * m_servo;
