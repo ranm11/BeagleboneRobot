@@ -53,6 +53,9 @@
 
   #include "utility/Teensy/RF24_arch_config.h"  
 //Everything else
+#elif defined(WIN32)
+#include <string.h>
+#include <stdint.h>
 #else 
 
   #include <Arduino.h>

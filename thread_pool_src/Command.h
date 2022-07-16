@@ -8,9 +8,10 @@
 #include"DCMotor.h"
 #include "Servo.h"
 #include "bus/SPIDevice.h"
-
+//#include "rf24/RF24.h"
 class ThreadPool;
 class ParseCommand;
+class RF24;
 
 #define MAX_SPI_MESSAGE 38
 constexpr uint16_t message_header = 0x5BFC;
@@ -117,4 +118,18 @@ public:
 private:
 	ThreadPool & m_pool;
 	exploringBB::Servo * m_servo;
+};
+
+/*
+	RF24 Reader
+*/
+
+class RF24ReadCommand : public ICommand
+{
+public:
+	RF24ReadCommand(ThreadPool &);
+	virtual void Execute();
+private:
+	ThreadPool & m_pool;
+	RF24* m_rf24;
 };

@@ -14,8 +14,9 @@ extern "C" {
 	
 #include <stddef.h>
 #include <time.h>
+#ifndef WIN32
 #include <sys/time.h>
-
+#endif
 void __msleep(int milisec);
 void __usleep(int milisec);
 void __start_timer();

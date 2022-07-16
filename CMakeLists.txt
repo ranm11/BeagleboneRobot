@@ -59,6 +59,9 @@ set(thread_pool_src ${thread_pool_src}
 	"thread_pool_src/bus/BusDevice.cpp"
 	"thread_pool_src/bus/SPIDevice_mock.cpp"
 	"thread_pool_src/WheelCommand.cpp"
+	"thread_pool_src/rf24/RF24_mock.cpp"
+	"thread_pool_src/rf24/compatibility_mock.c"
+	"thread_pool_src/RF24ReadCommand.cpp"
 	#"thread_pool_src/motor/StepperMotor.h"
 	#"thread_pool_src/motor/StepperMotor.cpp"
 	)
@@ -103,6 +106,7 @@ elseif(${BUILD_PLATFORM} STREQUAL "BBB")
 	"thread_pool_src/bus/BusDevice.cpp"
 	"thread_pool_src/bus/SPIDevice.cpp"
 	"thread_pool_src/WheelCommand.cpp"
+	"thread_pool_src/RF24ReadCommand.cpp"
 	"thread_pool_src/rf24/RF24.cpp"
 	"thread_pool_src/rf24/compatibility.c"
 	)

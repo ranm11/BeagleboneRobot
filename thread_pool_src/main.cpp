@@ -21,7 +21,7 @@ enum class Configuration
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+    std::cout << "BeagleBone Robot\n"; 
 	ThreadPool pool(8);
 	pool.Start();
 	ICommand * udp = new NetworkUdpReadCommand(pool);
@@ -29,6 +29,8 @@ int main()
 	//ICommand * m_spi_send = new SPISendCommand(pool);
 	ICommand *spiChannel = new SPIReadCommand(pool);
 	pool.Enque(spiChannel);
+	ICommand * rf24ReadCommand = new RF24ReadCommand(pool);
+	pool.Enque(rf24ReadCommand);
 	//for (int i = 0; i < 15; i++)
 	//{
 	//	ICommand * cmd = new TestCommand();
