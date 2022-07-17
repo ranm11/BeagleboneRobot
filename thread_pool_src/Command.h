@@ -80,11 +80,13 @@ class EngineCommand : public ICommand
 public:
 	EngineCommand(ThreadPool & pool);
 	virtual void Execute();
-	void setCommand(std::string cmd);
+	void setCommand(EngineMessage * msg);
 private:
 	ThreadPool & m_pool;
 	exploringBB::DCMotor * m_dcmotor;
 	exploringBB::PWM * m_pwm;
+	uint16_t direction;
+	uint32_t speed;
 };
 
 /*
@@ -113,6 +115,7 @@ public:
 private:
 	ThreadPool & m_pool;
 	exploringBB::Servo * m_servo;
+	uint16_t ServoValue;
 };
 
 /*

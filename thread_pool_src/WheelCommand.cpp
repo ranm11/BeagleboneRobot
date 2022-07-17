@@ -42,18 +42,18 @@ WheelCommand::WheelCommand(ThreadPool & pool):m_pool(pool)
 void WheelCommand::Execute()
 {
 	std::cout << "Reach SpoonCommand Command" << std::endl;
-	m_servo->Move_to(0);
-	std::this_thread::sleep_for(std::chrono::seconds(2));
+	m_servo->Move_to(ServoValue);
+	/*std::this_thread::sleep_for(std::chrono::seconds(2));
 	m_servo->Move_to(30);
 	std::this_thread::sleep_for(std::chrono::seconds(2));
 	m_servo->Move_to(60);
 	std::this_thread::sleep_for(std::chrono::seconds(2));
 	m_servo->Move_to(90);
 	std::this_thread::sleep_for(std::chrono::seconds(2));
-	m_servo->Move_to(170);
+	m_servo->Move_to(170);*/
 }
 
 void WheelCommand::setCommand(WheelMessage *  msg)
 {
-
+	ServoValue = msg->ServoValue;
 }

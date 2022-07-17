@@ -44,7 +44,7 @@ void EngineCommand::Execute()
 {
 	std::cout << "Reach Medial Command" << std::endl;
 
-	m_dcmotor->setSpeedPercent((unsigned int)50000);
+	m_dcmotor->setSpeedPercent((unsigned int)speed);
 	m_dcmotor->setDirection(exploringBB::DCMotor::CLOCKWISE);
 	std::this_thread::sleep_for(std::chrono::seconds(2));
 	m_dcmotor->setSpeedPercent((unsigned int)10000000);
@@ -54,7 +54,7 @@ void EngineCommand::Execute()
 	
 }
 
-void EngineCommand::setCommand(std::string cmd)
+void EngineCommand::setCommand(EngineMessage * msg)
 {
-
+	speed = msg->MotorSpeed;
 }

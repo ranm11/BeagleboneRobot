@@ -74,7 +74,7 @@ void ParseCommand::Parse(char* command)
 	uint8_t type = *(uint8_t*)(command + sizeof(CommandMarker));
 	switch (type) {
 	case CommandType::Engine:
-		m_engine1->setCommand(std::string(command));
+		m_engine1->setCommand((EngineMessage*)(command));
 		m_Pool.Enque(m_engine1);
 		break;
 	case CommandType::Wheel:
