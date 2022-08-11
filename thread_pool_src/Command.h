@@ -14,6 +14,13 @@ class ThreadPool;
 class ParseCommand;
 class RF24;
 
+enum class SPI_IN_MODE :uint8_t
+{
+	SIMULATOR,
+	ANALOG_A1_IN,
+	ANALOG_A0_IN,
+	RF24
+};
 
 
 class ICommand
@@ -39,28 +46,46 @@ private:
 	ParseCommand m_parseCommand;
 };
 
-// SPI Command Simulator
-class SpiCommandSimulator
+class ISpiInput
 {
 public:
-	SpiCommandSimulator();
-	int getCommand(unsigned char* command);
-private:
+	ISpiInput() {};
+	virtual int getCommand(unsigned char* command) {};
+protected:
 	WheelMessage m_wheelMessage;
 	EngineMessage m_engineMessage;
 
 };
 
+// SPI Command Simulator
+class SpiCommandSimulator :public ISpiInput
+{
+public:
+	SpiCommandSimulator();
+	int getCommand(unsigned char* command);
+
+};
+
+class AnalogReadStick :public ISpiInput
+{
+public:
+	AnalogReadStick();
+	int getCommand(unsigned char* command);
+private:
+	std::string analogRead();
+	//void autoConfig();
+};
+
 class SPIReadCommand :public ICommand
 {
 public:
-	SPIReadCommand(ThreadPool & pool );
+	SPIReadCommand(ThreadPool & pool, SPI_IN_MODE _in_mode );
 	virtual void Execute();
 private:
 	ThreadPool& m_Pool;
 	ParseCommand m_parseCommand;
 	exploringBB::SPIDevice* m_spiDevice;
-	SpiCommandSimulator* m_spi_sim;
+	ISpiInput* m_spi_sim;
 };
 
 /*
