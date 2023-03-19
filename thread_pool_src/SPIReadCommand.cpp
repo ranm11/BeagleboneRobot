@@ -15,10 +15,19 @@
 #define MAX_SPI_MESSAGE 38
 
 
-SPIReadCommand::SPIReadCommand(ThreadPool & pool) :m_Pool(pool), m_parseCommand(pool)
+SPIReadCommand::SPIReadCommand(ThreadPool & pool, SPI_IN_MODE _in_mode) :m_Pool(pool), m_parseCommand(pool)
 {
 	m_spiDevice = new exploringBB::SPIDevice(0, 1);
-	m_spi_sim = new SpiCommandSimulator();
+	switch (_in_mode)
+	{
+	case SPI_IN_MODE::SIMULATOR:
+		m_spi_sim = new SpiCommandSimulator();
+		break;
+	case SPI_IN_MODE::ANALOG_A1_IN:
+		m_spi_sim = new AnalogReadStick();
+		break;
+	}
+	
 }
 
 

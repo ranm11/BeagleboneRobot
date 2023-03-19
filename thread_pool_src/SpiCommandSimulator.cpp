@@ -8,7 +8,6 @@
 #include<thread>
 #include<chrono>
 #include "bus/SPIDevice.h"
-#include "Command.h"
 /*
 	this module replace the udp module
 	it should hold the parse command
