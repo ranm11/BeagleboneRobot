@@ -50,7 +50,7 @@ class ISpiInput
 {
 public:
 	ISpiInput() {};
-	virtual int getCommand(unsigned char* command) {};
+	virtual int getCommand(unsigned char* command) { return 0;}
 protected:
 	WheelMessage m_wheelMessage;
 	EngineMessage m_engineMessage;

@@ -24,7 +24,7 @@ SPIReadCommand::SPIReadCommand(ThreadPool & pool, SPI_IN_MODE _in_mode) :m_Pool(
 		m_spi_sim = new SpiCommandSimulator();
 		break;
 	case SPI_IN_MODE::ANALOG_A1_IN:
-		m_spi_sim = new AnalogReadStick();
+		//m_spi_sim = new AnalogReadStick();
 		break;
 	}
 	
