@@ -4,13 +4,29 @@ this code is a cross platform design,
 can be compiled for the beaglebone black embeded libux board 
 and for windows for debugging and testing.
 
+
+compile for  Windows platform (only for debug and initial expierience purpose) :
+1. mkdir win_build
+2. cd win_build 
+3. cmake  ..  -DBUILD_PLATFORM="WIN"
+4. cmake --build .
+
+compile for Beaglebone black microcontroler:
+1. download and install toolchain for beaglebone black from : https://gnutoolchains.com/beaglebone/
+2. updte sysroot path and compiler path in the BBB_toolchain/beaglebone_toolchain.cmake
+3. mkdir bbb_build 
+4. cd bbb_build
+5. cmake .. -G "Unix Makefiles"   -DBUILD_PLATFORM="BBB"               OR    cmake .. -G "Ninja"   -DBUILD_PLATFORM="BBB" 
+6. cmake --build .
+
+
 Network is supported within 3 channels :
 1. udp channel
 2. SPI channel 
 3. RF24 wirless channel
 
 
-components list:
+Hardware components list:
 
  n20 DC motors  - 2 pcs : https://www.aliexpress.com/item/33022320164.html?spm=a2g0o.order_list.order_list_main.4.6c7f1802XEEMoE
  
