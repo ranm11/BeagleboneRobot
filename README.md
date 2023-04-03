@@ -39,5 +39,7 @@ Hardware components list:
  Motor Mx1508 Driver : https://www.aliexpress.com/item/1005001636421978.html?spm=a2g0o.order_list.order_list_main.100.6c7f1802XEEMoE
  Microcontroller: Beaglebone black 
  
+ DC 2 DC : https://www.aliexpress.com/item/32963598972.html?spm=a2g0o.order_list.order_list_main.10.61db1802fahAPo
+ 
  for the controller :
  Dual Axis Stick : https://www.aliexpress.com/item/32701378948.html?spm=a2g0o.order_list.order_list_main.94.6c7f1802XEEMoE
