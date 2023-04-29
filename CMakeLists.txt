@@ -28,6 +28,8 @@ if(${BUILD_PLATFORM} STREQUAL "ANDROID")
 
 	target_sources(hello PRIVATE ${thread_pool_src})
 	
+	find_library(log-lib log)
+	target_link_libraries(hello ${log-lib})
 		
 	set_target_properties(hello PROPERTIES CXX_STANDARD 17)
 

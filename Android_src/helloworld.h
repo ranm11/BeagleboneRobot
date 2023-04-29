@@ -1,8 +1,6 @@
 #include<iostream>
 #include <vector>
-//#ifdef EMSCRIPTEN
-//	#include <emscripten.h>
-//#endif
+#include <android/log.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
