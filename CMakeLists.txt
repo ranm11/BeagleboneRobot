@@ -8,17 +8,22 @@ if(${BUILD_PLATFORM} STREQUAL "ANDROID")
 	set(ANDROID_TOOLCHAIN "clang")
 	set(ANDROID_PLATFORM android-16)
 
-	set(ANDROID_ABI "arm64-v8a")
-	set(ANDROID_ARM_MODE "arm")
+	#For arm64 device
+	#set(ANDROID_ABI "arm64-v8a")
+	#set(ANDROID_ARM_MODE "arm")
+	#
+	#For Simulator
+	set(ANDROID_ABI "x86_64")
+	
   
 	include( C:/Users/rminervy/git/Toolchains/toolchains/Android/android-ndk-r22b-windows-x86_64/android-ndk-r22b/build/cmake/android.toolchain.cmake)
 	set(CMAKE_ANDROID_NDK_TOOLCHAIN_VERSION clang)
 		project (hello)
 	#set(CMAKE_CXX_STANDARD 11)
-	add_library(hello)
+	add_library(hello SHARED)
 	set(thread_pool_src ${thread_pool_src} 
 	"Android_src/helloworld.cpp"
-	
+	"Android_src/wrapper.cpp"
 	)
 
 	target_sources(hello PRIVATE ${thread_pool_src})
