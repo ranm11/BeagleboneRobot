@@ -42,7 +42,7 @@ int write(string path, string filename, string value){
    std::cout << path + filename << std::endl;
    fs.open((path + filename).c_str());
    if (!fs.is_open()){
-	   perror("GPIO: write failed to open file ");
+	//   perror("GPIO: write failed to open file ");
 	   return -1;
    }
    fs << value;
@@ -59,7 +59,7 @@ string read(string path, string filename){
    ifstream fs;
    fs.open((path + filename).c_str());
    if (!fs.is_open()){
-	   perror("GPIO: read failed to open file ");
+	//   perror("GPIO: read failed to open file ");
     }
    string input;
    getline(fs,input);

@@ -15,5 +15,13 @@ RF24ReadCommand::RF24ReadCommand(ThreadPool & pool):m_pool(pool)
 void RF24ReadCommand::Execute()
 {
 	std::cout << "Reach RF24 Command Reader" << std::endl;
+	
+	// for win sim
+#ifdef WIN32
+	ICommand* spiCommand = new SPIReadCommand(m_pool, SPI_IN_MODE::SIMULATOR);
+
+	ICommand * spoon_cmd = new SpoonCommand(m_pool);
+	m_pool.Enque(spoon_cmd);
+#endif
 }
 

@@ -79,7 +79,11 @@ void ParseCommand::Parse(char* command)
 		break;
 	case CommandType::Wheel:
 		m_wheelCommand->setCommand((WheelMessage*)(command));
+		m_Pool.Enque(m_wheelCommand);
+		break;
+	case CommandType::Spoon:
 		m_Pool.Enque(m_spoon);
+		
 		break;
 	default:
 		break;

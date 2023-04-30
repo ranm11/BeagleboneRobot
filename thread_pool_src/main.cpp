@@ -27,10 +27,10 @@ int main()
 	ICommand * udp = new NetworkUdpReadCommand(pool);
 	pool.Enque(udp);
 	//ICommand * m_spi_send = new SPISendCommand(pool);
-	ICommand *spiChannel = new SPIReadCommand(pool,SPI_IN_MODE::ANALOG_A1_IN); //SIMULATOR/ STICK  add startegy here
-	pool.Enque(spiChannel);
-	ICommand * rf24ReadCommand = new RF24ReadCommand(pool);
-	pool.Enque(rf24ReadCommand);
+	//ICommand *spiChannel = new SPIReadCommand(pool,SPI_IN_MODE::ANALOG_A1_IN); //SIMULATOR/ STICK  add startegy here
+	//pool.Enque(spiChannel);
+	//ICommand * rf24ReadCommand = new RF24ReadCommand(pool);
+	//pool.Enque(rf24ReadCommand);
 	
 }
 
