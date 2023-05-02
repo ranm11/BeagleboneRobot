@@ -18,10 +18,13 @@ void RF24ReadCommand::Execute()
 	
 	// for win sim
 #ifdef WIN32
+
 	ICommand* spiCommand = new SPIReadCommand(m_pool, SPI_IN_MODE::SIMULATOR);
 
 	ICommand * spoon_cmd = new SpoonCommand(m_pool);
 	m_pool.Enque(spoon_cmd);
+	// Enque only events from now no longer Enqueue Commands
+
 #endif
 }
 

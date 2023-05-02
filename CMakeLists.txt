@@ -117,6 +117,7 @@ elseif(${BUILD_PLATFORM} STREQUAL "BBB")
 	"thread_pool_src/rf24/RF24.cpp"
 	"thread_pool_src/rf24/compatibility.c"
 	"thread_pool_src/StickAnalogRead/AnalogRead.cpp"
+	"thread_pool_src/Event.cpp"
 	)
 
 	target_sources(thread_pool PRIVATE ${thread_pool_src})

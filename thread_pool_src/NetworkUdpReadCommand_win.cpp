@@ -1,5 +1,6 @@
 //#include "pch.h"
 #include "Command.h"
+#include "Event.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,15 +16,13 @@
 
 NetworkUdpReadCommand::NetworkUdpReadCommand(ThreadPool & pool):m_Pool(pool),m_parseCommand(pool)
 {
-	
+	//subscribe to event
 }
 
 
 void NetworkUdpReadCommand::Execute()
 {
 	
-	//while (true)
-	//{
 		std::cout << "pending UDP packet" << std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 
@@ -34,8 +33,13 @@ void NetworkUdpReadCommand::Execute()
 		//m_Pool.Enque(cmd);
 		//m_parseCommand.Parse(buffer);
 		ICommand * rf24_cmd = new RF24ReadCommand(m_Pool);
-		m_Pool.Enque(rf24_cmd);
-	//}
-	
+		//m_Pool.Enque(rf24_cmd);
+		// Enque only events from now no longer Enqueue Commands
+		ICommand * dma_Call_event = new DMACall;
+		m_Pool.Enque(dma_Call_event);
+		ICommand * state_change_event = new State;
+		m_Pool.Enque(state_change_event);
+		ICommand * reset_event = new Reset;
+		m_Pool.Enque(reset_event);
 
 }

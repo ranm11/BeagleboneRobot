@@ -27,6 +27,7 @@ class ICommand
 {
 public:
 	virtual void Execute() = 0;
+	virtual void NotifyEvent() = 0;
 
 };
 
@@ -34,6 +35,7 @@ class TestCommand : public ICommand
 {
 public:
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 };
 
 class NetworkUdpReadCommand :public ICommand
@@ -41,6 +43,7 @@ class NetworkUdpReadCommand :public ICommand
 public:
 	NetworkUdpReadCommand(ThreadPool & pool);
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 private:
 	ThreadPool& m_Pool;
 	ParseCommand m_parseCommand;
@@ -81,6 +84,7 @@ class SPIReadCommand :public ICommand
 public:
 	SPIReadCommand(ThreadPool & pool, SPI_IN_MODE _in_mode );
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 private:
 	ThreadPool& m_Pool;
 	ParseCommand m_parseCommand;
@@ -105,6 +109,7 @@ class EngineCommand : public ICommand
 public:
 	EngineCommand(ThreadPool & pool);
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 	void setCommand(EngineMessage * msg);
 private:
 	ThreadPool & m_pool;
@@ -122,6 +127,7 @@ class SpoonCommand : public ICommand
 public:
 	SpoonCommand(ThreadPool & pool);
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 	void setCommand(std::string cmd);
 private:
 	ThreadPool & m_pool;
@@ -136,6 +142,7 @@ class WheelCommand : public ICommand
 public:
 	WheelCommand(ThreadPool & pool);
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 	void setCommand(WheelMessage* cmd);
 private:
 	ThreadPool & m_pool;
@@ -152,6 +159,7 @@ class RF24ReadCommand : public ICommand
 public:
 	RF24ReadCommand(ThreadPool &);
 	virtual void Execute();
+	virtual void NotifyEvent() {}
 private:
 	ThreadPool & m_pool;
 	RF24* m_rf24;
